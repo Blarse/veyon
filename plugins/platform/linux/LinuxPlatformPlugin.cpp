@@ -22,6 +22,8 @@
  *
  */
 
+#include <stdlib.h>
+
 #include <csignal>
 
 #include "LinuxPlatformPlugin.h"
@@ -36,6 +38,9 @@ LinuxPlatformPlugin::LinuxPlatformPlugin( QObject* parent ) :
 
 	// don't abort with SIGPIPE when writing to closed sockets e.g. while shutting down VncConnection
 	signal( SIGPIPE, SIG_IGN );
+
+	// use generic desktop independent of the actual desktop environment
+	setenv("XDG_CURRENT_DESKTOP", "X-Generic", 1);
 }
 
 
